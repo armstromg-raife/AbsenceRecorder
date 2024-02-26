@@ -15,8 +15,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List(state.divisions, id: \.self.code){ division in
-                NavigationLink(destination: AbsenceView(division: division  )){
-                    DivisionItem(division: division)
+                NavigationLink(destination: AbsenceView(absence: Absence(date:currentDate,students: division.students))){
+                    
+                        DivisionItem(division: division)
+                    
                 }
             }
             .navigationTitle(currentDate.getShortDate())
