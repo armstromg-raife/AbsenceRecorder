@@ -24,10 +24,14 @@ class Division{
     }
     
     func creatAbsenceOrGetExistingIfAvailable(for date: Date)->Absence{
-        return absences.first {
-            let comparison = Calendar.current.compare($0.takenOn,to: date,toGranularity: .day)
-            return comparison == .orderedSame
-        } ?? Absence(date:date,students:students)
+        if let existingAbsence = getAbsence(for: date){
+            return existingAbsence
+        }else{
+            let absence = Absence(date: date, students: students)
+            absences.append(absence)
+            return absence
+        }
+        
     }
     
     #if DEBUG
